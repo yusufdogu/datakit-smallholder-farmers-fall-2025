@@ -107,7 +107,7 @@ Larissa_de_Santi/
 ├── README.md (this file)
 ├── notebooks/
 │   ├── larissa_de_santi_v1.ipynb
-│   └──  larissa_de_santi_v2.ipynb
+│   └── larissa_de_santi_v2.ipynb
 ├── visualizations/
 │   ├── viz1.png
 │   └── viz2.png
