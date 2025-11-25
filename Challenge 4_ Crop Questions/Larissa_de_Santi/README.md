@@ -66,15 +66,15 @@ This concentration of questions in General/Livelihood topics (livestock, markets
 
 ## Visualizations
 
-### [Visualization 1 Title]
-![Visualization 1](visualizations/viz1.png)
+### Clustering
+![Clustering](visualizations/viz1.png)
 
-**Interpretation**: What this visualization shows and why it matters.
+**Interpretation**: The UMAP and clustering process successfully identified meaningful semantic categories despite the initial multilingual challenge, providing a clear foundation for further analysis and targeted support for farmers.
 
-### [Visualization 2 Title]
-![Visualization 2](visualizations/viz2.png)
+### Word Cloud
+![WordCloud](visualizations/viz2.png)
 
-**Interpretation**: What this visualization shows and why it matters.
+**Interpretation**: The word clouds provide intuitive visual representations of the most frequent and central themes within each of the five identified agricultural clusters (excluding noise). This visualization is crucial for validating the cluster labels (e.g., verifying that "seeds" and "grow" dominate the Production cluster).
 
 ## Limitations and Challenges
 
@@ -110,8 +110,7 @@ Larissa_de_Santi/
 │   └──  larissa_de_santi_v2.ipynb
 ├── visualizations/
 │   ├── viz1.png
-│   ├── viz2.png
-│   └── viz3.png
+│   └── viz2.png
 ```
 
 ## How to Run This Analysis
