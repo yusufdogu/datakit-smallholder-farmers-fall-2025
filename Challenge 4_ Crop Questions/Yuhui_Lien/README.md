@@ -240,7 +240,7 @@ The following reports quantify the relationship between farmer necessity and pla
 
 ### Next Steps:
 
-1. **Knowledge Quality Assessment (BERTopic)**: Implement BERTopic to analyze community response content, shifting the focus from mere answer length to knowledge focus and quality to precisely identify true information gaps.
+1. **Knowledge Quality Assessment (TF-IDF)**: The initial assessment of knowledge quality, shifting focus from mere answer length to semantic depth, has been completed using the Group-wise TF-IDF model.
 
 
 
@@ -266,7 +266,7 @@ This analysis moves beyond simple keyword matching to quantify the semantic diff
 
 #### 3. Knowledge Surplus (Effective Supply)
 
-* **Negative Gaps:** A few topics, including **caliandra** ($\text{Gap} \approx -0.0028$) and **parsley** ($\text{Gap} \approx -0.0024$), exhibit a negative $\text{Knowledge\_Gap\_Score}$.
+* **Negative Gaps:** A few topics, including **caliandra** ($\text{Gap} \approx -0.0028$) and **parsley** ($\text{Gap} \approx -0.0024$), exhibit a negative.
 * *Insight:* This indicates a knowledge **surplus**. The average **Supply Detail** for these topics is significantly higher than the average **Demand Complexity**, suggesting a strong culture of detailed and comprehensive sharing by experts within these specific sub-communities.
 
 ---
@@ -300,9 +300,12 @@ To better capture the specialized depth of conversation within each topic, **TF-
 ### 3.3 Weighted Scoring and Gap Calculation
 The model calculates a final weighted score for Supply and determines the Mismatch Gap:
 
-* **Average Demand Complexity** ($\text{Normalized Question Length}$ $\times$ $\text{WEIGHT\_COUNT}$) + ($\text{Semantic Demand Score}$ $\times$ $\text{WEIGHT\_SEMANTIC}$)
-* **Average Supply Detail** ($\text{Normalized Answer Length}$ $\times$ $\text{WEIGHT\_COUNT}$) + ($\text{Semantic Supply Score}$ $\times$ $\text{WEIGHT\_SEMANTIC}$)
-* **Knowledge Gap Score:** $\text{Average\_Demand\_Complexity} - \text{Average\_Supply\_Detail}$
+* **Average Demand Complexity**
+$$\text{Average\_Demand\_Complexity} = (\text{Normalized Question Length} \times \text{WEIGHT\_COUNT}) + (\text{Semantic Demand Score} \times \text{WEIGHT\_SEMANTIC})$$
+* **Average Supply Detail**
+$$\text{Average\_Supply\_Detail} = (\text{Normalized Answer Length} \times \text{WEIGHT\_COUNT}) + (\text{Semantic Supply Score} \times \text{WEIGHT\_SEMANTIC})$$
+* **Knowledge Gap Score**
+$$\text{Knowledge\_Gap\_Score} = \text{Average\_Demand\_Complexity} - \text{Average\_Supply\_Detail}$$
 
 ---
 
@@ -311,25 +314,21 @@ The model calculates a final weighted score for Supply and determines the Mismat
 The four charts provide a complete diagnostic view, moving from basic frequency to complex risk assessment.
 
 ### Report A: Demand Volume Ranking (Frequency)
-(File: $\text{top\_10\_question\_volume\_report.png}$)
 ![Top 10 Question Topics by Demand Volume](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/top_10_question_volume_report.png)
 
 * **Takeaway:** The top 4 topics represent the highest consumption of system capacity.
 
 ### Report B: Knowledge Gap Ranking (Top 15 Unmet Demand)
-(File: $\text{1\_gap\_ranking\_report.png}$)
 ![Knowledge Gap Ranking Report](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/1_gap_ranking_report.png)
 
 * **Takeaway:** The highest unmet demand is concentrated in niche crop topics like **purple-vetch** and **blackberry**, which require immediate content focus to address deep semantic deficiencies.
 
 ### Report C: Semantic Mismatch: Supply vs. Demand
-(File: $\text{2\_supply\_demand\_mismatch\_labeled.png}$)
 ![Semantic Mismatch Comparison Chart](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/2_supply_demand_mismatch_labeled.png)
 
 * **Takeaway:** For the top gaps, the **Demand (Complexity)** score significantly exceeds the **Supply (Detail)** score, confirming a severe lack of specialized, high-quality answers relative to the technicality of the questions. The largest gap (**purple-vetch**) shows a Demand score ($\approx 0.0531$) more than double its Supply score ($\approx 0.0250$).
 
 ### Figure 4: Prioritization Matrix (Volume vs. Gap)
-(File: $\text{3\_priority\_matrix\_labeled\_seaborn.png}$)
 ![Prioritization Matrix: Volume vs. Semantic Gap](https://github.com/yhlien1221/datakit-smallholder-farmers-fall-2025/blob/main/Challenge%204_%20Crop%20Questions/Yuhui_Lien/pictures/3_priority_matrix_labeled_seaborn.png)
 
 * **Takeaway:** This matrix identifies the **Top-Left Quadrant** as the primary risk zone, where low-volume (low impact) topics like **purple-vetch** and **blackberry** carry the highest **semantic risk** ($\text{Y-axis}$). This clarifies that resource allocation should prioritize **content quality and specialization** over simply increasing volume for high-frequency (low-risk) general topics.
