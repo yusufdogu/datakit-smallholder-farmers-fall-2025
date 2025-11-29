@@ -1,3 +1,7 @@
+
+
+
+
 questions <- readr::read_csv(
   "C:/Users/am488/Downloads/Datakind_Data.csv",
   n_max = 1000000
@@ -449,3 +453,84 @@ ggplot(fin_crop_matrix,
     axis.text.x = element_text(angle = 45, hjust = 1),
     panel.grid = element_blank()
   )
+
+
+
+
+
+
+
+
+
+
+
+
+model_data <- questions %>%
+  select(question_text_clean, is_financial) %>%
+  filter(!is.na(question_text_clean))
+
+table(model_data$is_financial)
+
+
+set.seed(123)
+
+train_index <- sample(nrow(model_data), 0.8 * nrow(model_data))
+
+train_data <- model_data[train_index, ]
+test_data  <- model_data[-train_index, ]
+
+nrow(train_data)
+nrow(test_data)
+head(train_data)
+
+
+
+install.packages("text2vec")
+library(text2vec)
+
+
+it_train <- itoken(
+  train_data$question_text_clean,
+  tokenizer = word_tokenizer,
+  progressbar = TRUE
+)
+
+vocab <- create_vocabulary(it_train)
+vocab <- prune_vocabulary(vocab, term_count_min = 5)  # remove very rare words
+
+
+vectorizer <- vocab_vectorizer(vocab)
+
+
+dtm_train <- create_dtm(it_train, vectorizer)
+
+it_test <- itoken(
+  test_data$question_text_clean,
+  tokenizer = word_tokenizer,
+  progressbar = TRUE
+)
+
+dtm_test <- create_dtm(it_test, vectorizer)
+
+dim(dtm_train)
+dim(dtm_test)
+
+
+y_train <- as.numeric(train_data$is_financial)
+y_test  <- as.numeric(test_data$is_financial)
+
+table(y_train)
+table(y_test)
+
+
+library(glmnet)
+
+glmnet_model <- cv.glmnet(
+  x = dtm_train,
+  y = y_train,
+  family = "binomial",
+  alpha = 1,     # LASSO
+  nfolds = 5,
+  type.measure = "class"
+)
+
