@@ -160,7 +160,7 @@ Precious Enahoro/
 │   ├── data_loader.py
 │   ├── preprocessing.py
 │   └── visualization.py
-├── key-findings-visualizations/
+├── key-findings-vizzes/
 │   ├── viz1.png
 │   ├── viz2.png
 │   └── viz3.png
